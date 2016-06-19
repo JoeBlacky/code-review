@@ -1,0 +1,1032 @@
+@charset "UTF-8";
+/*
+  Общие коменты:
+
+
+
+*/
+
+
+body {
+  font-family: "PathwayGothicOne", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  color: #615f5f;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.42857;
+  -webkit-font-smoothing: antialised;
+}
+
+.hidden {
+  display: none;
+}
+
+.clear {
+  clear: both;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  color: #383636;
+  text-align: center;
+  /* Сюда можно вынести line-height: 1 */
+}
+
+h1 {
+  font-size: 70px;
+  line-height: 70px;
+  /* Лучше использовать line-height: 1, т.к. в дальнейшем для респонсива
+  придется менять только font-size, при этом line-height подстроится
+  автоматически. https://developer.mozilla.org/en/docs/Web/CSS/line-height -
+  тут расписано за line-height */
+}
+
+h2 {
+  font-size: 60px;
+  line-height: 60px;
+  text-transform: capitalize;
+}
+
+h3 {
+  font-size: 44px;
+  line-height: 44px;
+}
+
+h4 {
+  font-size: 34px;
+  line-height: 34px;
+}
+
+.basic_h_a {
+  color: #383636;
+  /* Лучше использовать color: inherit; Т.к. у тебя одинаковый цвет для body и
+  этого блока. Возможно в дальнейшем поменяется цвет у body и тебе не придется
+  бегать по документу и менять его везде.
+  http://www.w3schools.com/cssref/css_inherit.asp */
+  font-size: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.basic_h_a:hover {
+  color: #cccccc;
+}
+
+.basic_p_a {
+  color: #383636;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  /* Можно было отнаследоваться от .basic_h_a и изиенить только font-size и
+  line-height. В CSS'нике это выглядело бы так
+  .small_h_a{
+    font-size: 14px;
+    line-height: 20px;
+  }
+  В разметке:
+  <a href="#" class="basic_h_a small_h_a">Text</a>;
+  Такая херня делается чтобы не дублировать стили.
+  */
+}
+.basic_p_a:hover {
+  color: #cccccc;
+}
+
+/*/////////////////////////////
+ * кнопка more  */
+.btn {
+  color: #383636;
+  border: 1px solid #615f5f;
+  padding: 3px 50px 7px;
+  font-size: 30px;
+  transition: all 0.5s ease;
+}
+.btn:hover {
+  background-color: #615f5f;
+  color: white;
+}
+
+.loader {
+  background: none repeat scroll 0 0 white;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+}
+.loader .loader_inner {
+  background-image: url("../img/preloader.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: white;
+  height: 60px;
+  width: 60px;
+  margin-top: -30px;
+  margin-left: -30px;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  /* Можно сделать без .loader_inner. Указать для .loader
+  стили для background.
+  Пример:
+  .loader{
+    -- old styles --
+    background: #FFF url(../img/preloader.gif) no-repeat center center;
+  }*/
+}
+
+/*//////////////////////////
+ * header    */
+.header_container_wrapper {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  transition: all 0.5s ease;
+  transform: translateZ(0);
+  border-bottom: 1px solid #414141;
+  padding-top: 0;
+  /* Не совсем понял зачем тут transition и transform. Если свойство меняется на
+  none, transition не применяется. Чтобы был transition для border'a над вкатать
+  .activeScroll .header_container_wrapper{
+    border-color: transparent;
+  }
+  Нужно выбрать 1 стиль названия классов, либо .activeScroll(camelCase) либо через
+  нижние подчеркивания .header_anime;
+  */
+}
+
+.header_anime {
+  position: relative;
+  background-color: white;
+  height: 85px;
+  padding-top: 20px;
+  /* Старайся не задавать фиксированую высоту, если в этом нет нужды.
+  Фиксированную высоту прописывают очень редко, как и фиксированную ширину.
+  С этого селектора можно убрать height: 85px; padding-top: 20px; а для
+  селектора .stock_btn_mnu добавить padding: 20px 0;
+  В таком случае, даже если у тебя повалится меню(будет больше элементов чем
+  задумано), хотя бы будет не так страшно выглядеть.
+  */
+}
+
+.activeScroll .header_container_wrapper {
+  position: fixed;
+  border-bottom: none;
+  /* Для .header_container-wrapper можно сразу задать position: fixed, причем,
+  я не сильно понимаю разницу между fixed и sticky. */
+}
+
+.navi {
+  text-align: right;
+}
+.navi ul,
+.navi li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.navi ul {
+  padding-top: 10px;
+}
+.navi li {
+  display: inline-block;
+  margin: 0 15px;
+  font-size: 24px;
+}
+.navi li:last-child {
+  margin-right: 0;
+}
+.navi li:hover {
+  color: #383636;
+  border-bottom: 2px solid #383636;
+  /* Дублируются стили с .navi li.active. Почининить можно так:
+  .navi li:hover,
+  .navi li.active{
+    color: #383636;
+    border-bottom: 2px solid #383636;
+  }
+  Работать все будет также, только сейчас стало на 2 строки меньше кода и стили
+  стали унифицированы.
+  */
+}
+.navi li a {
+  color: #615f5f;
+  text-decoration: none;
+  outline: none;
+}
+.navi li.active {
+  color: #383636;
+  border-bottom: 2px solid #383636;
+}
+
+/*///////////////////////////
+ * кнопка меню  */
+.stock_btn_mnu {
+  position: relative;
+}
+
+#menu-toggle span {
+  display: block;
+  background: #566973;
+  border-radius: 2px;
+}
+
+#menu-toggle {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  z-index: 101;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  /* display: block можно было написать с той @media с которой ты хотел чтобы он
+  показывался. Не совсем понял зачем полу-прозрачный белый background.
+  border-radius тоже тут не работает, т.к. видимый bg от #menu-toggle .hamburger*/
+}
+#menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+#menu-toggle .hamburger {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #eeeeee;
+  /* Для #HEX значений с шестью одинаковыми символами можно использовать
+  укороченное написание #eeeeee = #eee.
+  Дублирование стилей: position, heightm width с #menu-toggle .cross; Можно
+  вынести как я показывал выше.*/
+}
+#menu-toggle .hamburger span {
+  width: 36px;
+  height: 3px;
+  position: relative;
+  top: 8px;
+  left: 7px;
+  margin: 6px 0;
+  /* Можно убрать свойтсва: position, top, left, width и заменить их
+  на padding: 8px 7px; у селектора #menu-toggle .hamburger
+  Получится так
+  #menu-toggle .hamburger{
+    padding: 8px 7px;
+  }
+  #menu-toggle .hamburger span{
+    height: 3px;
+    margin: 6px 0;
+  }
+  width убрали т.к. у тебя стоит #menu-toggle span{
+    display: block;
+  }
+  Блочные элементы тянутся на всю ширину блока, если им не зада ширина.
+  */
+}
+#menu-toggle .hamburger span:nth-child(1) {
+  transition-delay: 0.3s;
+}
+#menu-toggle .hamburger span:nth-child(2) {
+  transition-delay: 0.425s;
+}
+#menu-toggle .hamburger span:nth-child(3) {
+  transition-delay: 0.55s;
+}
+#menu-toggle .cross {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transform: rotate(45deg);
+}
+#menu-toggle .cross span:nth-child(1) {
+  height: 0;
+  width: 3px;
+  position: absolute;
+  top: 10%;
+  left: 23px;
+  transition-delay: 0s;
+}
+#menu-toggle .cross span:nth-child(2) {
+  width: 0%; /* После 0 можно не писать единицы размерностей, они всеравно
+  игнорируются при выполнени правил */
+  height: 3px;
+  position: absolute;
+  left: 10%;
+  top: 23px;
+  transition-delay: 0.15s;
+}
+
+#menu-toggle.open .hamburger span {
+  width: 0;
+}
+#menu-toggle.open .hamburger span:nth-child(1) {
+  transition-delay: 0s;
+}
+#menu-toggle.open .hamburger span:nth-child(2) {
+  transition-delay: 0.125s;
+}
+#menu-toggle.open .hamburger span:nth-child(3) {
+  transition-delay: 0.25s;
+}
+#menu-toggle.open .cross span:nth-child(1) {
+  height: 80%;
+  transition-delay: 0.325s;
+}
+#menu-toggle.open .cross span:nth-child(2) {
+  width: 80%;
+  transition-delay: 0.175s;
+}
+
+/*///////////////////////////
+ * content    */
+.ta-center {
+  text-align: center;
+}
+.ta-center h1 {
+  margin-bottom: 30px;
+  padding-top: 40px;
+}
+.ta-center p {
+  font-size: 24px;
+  line-height: 30px;
+}
+.ta-center p a {
+  color: #383636; /* Этот цвет часто повторяется, его можно вынести в body{
+    color: #383636;
+  }*/
+  text-decoration: none;
+  transition: all 0.5s ease;
+}
+.ta-center p a:hover {
+  color: #cccccc;
+}
+
+.banners {
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+.banners .nan_pdd {
+  padding: 0;
+  margin: 0;
+}
+
+.banner {
+  outline: 1px solid white;
+}
+.banner:hover .bann_text span {
+  width: 100%;
+}
+.banner a {
+  position: relative;
+  color: white;
+}
+.banner a:hover {
+  color: white;
+}
+.banner a img {
+  max-width: 100%;
+}
+.banner .bann_text {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: -40px;
+  display: inline-block;
+  /* Так можно центрировать блоки, но есть 1 но, если картинка будет меньше чем
+  текст, то текст обрежется, и отступ в -40рх тоже так себе затея, т.к. у тебя
+  может быть 2 строчки текста и он уже не скомпенсирует половину высоты блока.
+  Вместо margin'a можно использовать transform: translate(0,-25% или 50%);
+  Он высчитывает относительно высоты блока будь она 40рх или 80рх */
+}
+.banner .bann_text span {
+  border-bottom: 1px solid white;
+  display: inline-block;
+  padding-bottom: 14px;
+  font-size: 46px;
+  line-height: 46px;
+  transition: all 0.5s ease 0s;
+  width: 241px;
+  /* Бедовая затея писать фиксированую ширину, т.к. у тебя не все слова влазят
+  в нее(Development занимает больше места чем 241рх). */
+}
+
+.about_us {
+  padding: 30px 0;
+  text-align: center;
+}
+.about_us p {
+  font-size: 24px;
+  line-height: 30px;
+  max-width: 770px;
+  margin: 25px auto 40px;
+  padding: 0 10px;
+}
+.about_us h2 {
+  padding-bottom: 0;
+}
+
+/*/////////////////////////////
+ * линия после блока  */
+.bottom_line {
+  border-top: 1px solid #383636;
+  margin: 20px 0;
+  /* Класс лучше стараться давать наиболее абстрактно, т.к. сейчас у тебя линия
+  ниже блока, а через месяц могут передумать и поставить выше блока, тогда будет
+  чутка не логично, что делает нижняя линия выше блока. Дабы избежать таких
+  казусов лучше назвать класс .divider или .line не привязываясь к его позиции */
+}
+
+.news_wrap {
+  padding: 40px 0;
+}
+
+.item_news {
+  margin-top: 50px;
+}
+.item_news img {
+  float: left;
+  width: auto;
+  padding-top: 7px;
+  /* Если используешь float, не забывай добавлять clearfix к родителю */
+}
+
+.text_news {
+  padding-left: 200px;
+}
+.text_news .data_news {
+  display: block;
+  font-size: 20px;
+  color: #383636;
+}
+.text_news a {
+  color: #383636;
+  font-size: 30px;
+  line-height: 30px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  /* Дублиование стилей */
+}
+.text_news a:hover {
+  color: #cccccc;
+  /* Дублиование стилей */
+}
+.text_news p {
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.featured {
+  padding: 30px 0 75px;
+}
+.featured h2 {
+  margin-bottom: 20px;
+}
+
+.featured_item {
+  margin-top: 30px;
+}
+.featured_item .circ {
+  display: block;
+  position: relative;
+  height: 269px;
+  width: 269px;
+  border-radius: 50%;
+  outline: none;
+}
+.featured_item .circ:hover .img_wrap {
+  transform: rotate(-90deg);
+}
+.featured_item .circ:hover .info {
+  opacity: 1;
+  left: 0;
+}
+.featured_item .img_wrap {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 269px;
+  width: 269px;
+  transition: all 0.5s ease;
+  /* Этот класс можно было добавить к тегу <img> и не делать дополнительную
+     обертку из <div> а ::after повесить на .featured_item .circ; */
+}
+.featured_item .img_wrap::after {
+  content: "";
+  box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.6) inset;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 50%;
+}
+.featured_item .img_wrap img {
+  width: 100%;
+  height: 100%;
+}
+.featured_item .info {
+  opacity: 0;
+  color: white;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: -269px;
+  height: 269px;
+  width: 269px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  padding: 90px 45px 0;
+  transition: all 0.35s ease;
+  /* Фиксированые значения не всегда хорошо, старайся использовать %, или % в
+     связке с рх; Выравнивать padding'ом тоже не комильфо, подробнее как выровнять
+     в блоке с неизвестноый высотой
+     1. Old School - https://css-tricks.com/centering-in-the-unknown/
+     2. Более свежая инфа - https://css-tricks.com/centering-css-complete-guide/
+     В обеих статьях дельные советы. */
+}
+.featured_item .info h4 {
+  font-size: 40px;
+  line-height: 40px;
+  color: white;
+  border-bottom: 1px solid white;
+  padding-bottom: 20px;
+  font-weight: normal;
+  margin: 0;
+  text-transform: capitalize;
+}
+.featured_item .info span {
+  display: block;
+  font-size: 22px;
+}
+
+/*/////////////////////////////
+ * блок footer	 */
+.my_footer {
+  border-top: 1px solid #383636;
+  padding: 50px 0;
+}
+.my_footer p {
+  padding: 5px 0 0;
+  margin: 0;
+}
+.my_footer p span {
+  font-weight: bold;
+  font-size: 16px;
+}
+.my_footer p a {
+  color: #383636;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  /* Дублирование стилей */
+}
+.my_footer p a:hover {
+  color: #cccccc;
+  /* Дублирование стилей */
+}
+.my_footer .p_gray {
+  color: #908b8b;
+}
+.my_footer .p_gray a {
+  color: #908b8b;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  /* Лучше использовать color: inherit; Так цвет отнаследуется от родителя. */
+}
+.my_footer .p_gray a:hover {
+  color: #383636;
+}
+.my_footer .soc_icons {
+  text-align: right;
+}
+.my_footer .soc_icons ul,
+.my_footer .soc_icons li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.my_footer .soc_icons li {
+  display: inline-block;
+  margin-left: 10px;
+}
+.my_footer .soc_icons li .fa {
+  font-size: 36px;
+  color: #383636;
+  transition: all 0.5s ease;
+  /* Старайся не делать вложеность больше 3 эл-ов.
+     Полезная статья - https://habrahabr.ru/post/256109/ */
+}
+.my_footer .soc_icons li .fa:hover {
+  color: #cccccc;
+}
+
+/*/////////////////////////////
+ * index-1   */
+.ta_page2 {
+  padding: 0 0 40px;
+  /* Так себе название класса */
+}
+.ta_page2 h1 {
+  text-align: center;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.servic_item {
+  margin-top: 50px;
+}
+.servic_item img {
+  float: left;
+  width: auto;
+  padding-top: 0;
+}
+.servic_item .text_wrap {
+  padding-left: 290px;
+}
+.servic_item .text_wrap p {
+  padding: 0;
+  margin: 10px 0 0;
+  /* Весь блок .servic_item аналогичен блоку с новостями и блоком менеджмент,
+     можно их организовать в общий блок, т.к. дублируется дохерища стилей.
+     Опять же флоат без клиарера */
+}
+
+.management_wrap {
+  padding: 50px 0 20px;
+}
+.management_wrap h2 {
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.item_management {
+  margin-bottom: 50px;
+}
+.item_management img {
+  float: left;
+  width: auto;
+}
+.item_management .text_management {
+  padding-left: 290px;
+}
+.item_management .text_management a {
+  display: inline-block;
+  max-height: 46px;
+  padding-top: 0;
+  margin-top: 4px;
+}
+
+.choose_us ul {
+  padding: 0;
+  margin: 35px 0 30px 12px;
+}
+.choose_us li {
+  padding: 10px 0 0 17px;
+}
+
+/*///////////////////////
+ * index 2 */
+.ta_page3 {
+  padding: 30px 0 20px;
+}
+.ta_page3 h1 {
+  margin: 0 0 40px;
+}
+
+.portfolio_item {
+  margin-bottom: 60px;
+}
+.portfolio_item .gallery_wrap {
+  background: black url("../img/magnify.png") no-repeat scroll center center;
+  display: block;
+  border: 1px solid #d3cdcd;
+  position: relative;
+  transition: all 0.5s ease;
+  outline: none;
+}
+.portfolio_item .gallery_wrap:hover img {
+  opacity: 0.2;
+}
+.portfolio_item .gallery_wrap img {
+  width: 100%;
+  transition: all 0.5s ease;
+}
+.portfolio_item .basic_h_a {
+  text-transform: capitalize;
+  margin-top: 40px;
+  display: block;
+}
+
+.mfp-ready .mfp-figure {
+  opacity: 0;
+}
+
+.mfp-zoom-in .mfp-figure, .mfp-zoom-in .mfp-iframe-holder .mfp-iframe-scaler {
+  opacity: 0;
+  transition: all 0.3s ease-out;
+  transform: scale(0.95);
+  /* Если идет перечисление, луше каждое новое делай с новой строчки
+     .mfp-zoom-in .mfp-figure, .mfp-zoom-in .mfp-iframe-holder .mfp-iframe-scaler - не ок
+     .mfp-zoom-in .mfp-figure,
+     .mfp-zoom-in .mfp-iframe-holder .mfp-iframe-scaler - лучше*/
+}
+.mfp-zoom-in.mfp-bg, .mfp-zoom-in .mfp-preloader {
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+.mfp-zoom-in.mfp-image-loaded .mfp-figure {
+  opacity: 1;
+  transform: scale(1);
+}
+.mfp-zoom-in.mfp-ready .mfp-iframe-holder .mfp-iframe-scaler {
+  opacity: 1;
+  transform: scale(1);
+}
+.mfp-zoom-in.mfp-ready.mfp-bg, .mfp-zoom-in.mfp-ready .mfp-preloader {
+  opacity: 0.8;
+}
+.mfp-zoom-in.mfp-removing .mfp-figure, .mfp-zoom-in.mfp-removing .mfp-iframe-holder .mfp-iframe-scaler {
+  transform: scale(0.95);
+  opacity: 0;
+}
+.mfp-zoom-in.mfp-removing.mfp-bg, .mfp-zoom-in.mfp-removing .mfp-preloader {
+  opacity: 0;
+}
+
+.mfp-iframe-scaler {
+  overflow: visible;
+}
+
+.mfp-zoom-out-cur {
+  cursor: auto;
+}
+.mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: pointer;
+}
+
+.mfp-preloader {
+  width: 30px !important;
+  height: 30px !important;
+  background-color: #cccccc;
+  opacity: 1;
+  margin: 0 auto;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes rotateplane {
+  0% {
+    -webkit-transform: perspective(120px);
+  }
+
+  50% {
+    -webkit-transform: perspective(120px) rotateY(180deg);
+  }
+
+  100% {
+    -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg);
+  }
+}
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+  }
+
+  50% {
+    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+  }
+
+  100% {
+    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  }
+}
+/*///////////////////////
+ * index 3 */
+.blog_page4 {
+  padding: 70px 0 30px;
+}
+.blog_page4 h2 {
+  margin: 0 0 50px;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.item_blog {
+  margin-bottom: 50px;
+}
+.item_blog .text_h {
+  margin-bottom: 10px;
+  /* Можно применить к .basic_h_a */
+}
+.item_blog .text_h a {
+  max-height: 46px;
+  /* Можно применить к .basic_h_a */
+}
+.item_blog .time_adm {
+  margin-bottom: 10px;
+}
+.item_blog .time_adm a {
+  font-size: 14px;
+}
+.item_blog img {
+  float: left;
+  width: auto;
+  border: 1px solid #cccccc;
+}
+.item_blog .text_blog {
+  padding-left: 290px;
+}
+.item_blog .text_blog p {
+  margin: 0 0 15px;
+  padding: 0;
+}
+.item_blog .text_blog .btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 45px 5px;
+}
+
+.blog_right_bar h2 {
+  text-align: left;
+}
+
+/*//////////////////
+ * form search */
+.search {
+  position: relative;
+  margin-bottom: 50px;
+}
+.search .input_sech {
+  padding: 10px 70px 10px 15px;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: white;
+  color: #615f5f;
+  font-size: 16px;
+  font-style: italic;
+  outline: none;
+  border: 1px solid #cccccc;
+}
+.search .input_sub {
+  width: 60px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: white url(../img/search_icon.png) no-repeat center;
+  box-shadow: none;
+  border: 1px solid #cccccc;
+  border-left: none;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+.search .input_sub:hover {
+  opacity: 0.5;
+}
+
+.categories {
+  margin-bottom: 50px;
+}
+.categories h2 {
+  text-align: left;
+  margin-bottom: 20px;
+}
+.categories ul {
+  padding: 0;
+  margin: 20px 0 30px 12px;
+}
+.categories li {
+  padding: 12px 0 0 17px;
+}
+
+.poll h2 {
+  text-align: left;
+  margin-bottom: 35px;
+}
+
+.percent_box {
+  margin-bottom: 20px;
+}
+.percent_box span {
+  padding: 0 15px;
+}
+.percent_box .percent_right {
+  float: right;
+}
+
+.scale {
+  height: 14px;
+  width: 100%;
+  background-color: #cccccc;
+  position: relative;
+}
+.scale .percent {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #5c5c5c;
+}
+
+/*///////////////////////
+ * index 4 */
+.map iframe {
+  pointer-events: none;
+  /* Карта чуть чуть не так подключается
+     https://developers.google.com/maps/documentation/javascript/tutorial#HTML5 */
+}
+
+.contact_form_wrap {
+  padding: 0 0 40px;
+}
+.contact_form_wrap h4 {
+  text-align: left;
+}
+
+.contact_form .control-group {
+  margin: 30px 0;
+  display: block;
+}
+.contact_form input {
+  display: block;
+  width: 335px;
+  padding: 10px 25px;
+  border-radius: none;
+}
+.contact_form textarea {
+  width: 100%;
+  padding: 10px 25px;
+  height: 170px;
+}
+.contact_form input,
+.contact_form textarea {
+  border: 1px solid #cccccc;
+  color: black;
+  transition: all 0.5s ease;
+}
+.contact_form input:focus,
+.contact_form textarea:focus {
+  color: #615f5f;
+}
+.contact_form p {
+  display: block;
+}
+.contact_form .btn-group {
+  display: block;
+  width: 100%;
+  text-align: right;
+  margin-bottom: 40px;
+  /* В форму лучше не пихать теги которые не относятся к форме. Могут быть
+     проблемы в рендеринге на скрин ридерах. */
+}
+.contact_form .btn-group .btn {
+  font-size: 28px;
+  margin-left: 20px;
+  color: #383636;
+  border: 1px solid #828282;
+  padding: 3px 30px;
+  background-color: white;
+}
+.contact_form .btn-group button:hover {
+  color: white;
+  background-color: #615f5f;
+}
+
+.text-danger {
+  color: #e02a05;
+  font-size: 11px;
+  margin: 0;
+  padding: 0;
+  /* Класс лучше назвать .valiadtion-error, .text-error */
+}
+
+.contact_information {
+  padding: 0 0 40px;
+  /* Для телефона можно использовать <a href="tel:123456">123456</a> */
+}
+.contact_information h3 {
+  text-align: left;
+}
+
+.btn-up {
+  display: none;
+  height: 41px;
+  width: 35px;
+  background-image: url("../img/totop1.png");
+  position: fixed;
+  right: 20px;
+  bottom: 55px;
+}
+.btn-up:hover {
+  background-position: 35px 0;
+}

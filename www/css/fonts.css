@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "BenchNineRegular";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/BenchNineRegular/BenchNineRegular.eot?#iefix") format("embedded-opentype"), url("../fonts/BenchNineRegular/BenchNineRegular.woff") format("woff"), url("../fonts/BenchNineRegular/BenchNineRegular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PathwayGothicOne";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/PathwayGothicOne/PathwayGothicOne.eot?#iefix") format("embedded-opentype"), url("../fonts/PathwayGothicOne/PathwayGothicOne.woff") format("woff"), url("../fonts/PathwayGothicOne/PathwayGothicOne.ttf") format("truetype");
+}

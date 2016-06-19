@@ -1,0 +1,223 @@
+/*==========  Desktop First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+	.featured_item .circ {
+		height: 229px;
+		width: 229px;
+	}
+	.featured_item .img_wrap{
+		height: 229px;
+		width: 229px;
+	}
+	.featured_item .info{
+		height: 229px;
+		width: 229px;
+	}
+	.servic_item img {
+		max-width: 200px;
+	}
+	.servic_item .text_wrap {
+		padding-left: 210px;
+	}
+	.map iframe {
+		width: 940px;
+	}
+
+
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+	.featured_item .circ {
+		height: 269px;
+		width: 269px;
+	}
+	.featured_item .img_wrap{
+		height: 269px;
+		width: 269px;
+	}
+	.featured_item .info{
+		height: 269px;
+		width: 269px;
+		/* 1. Адовый пиздец творится на 992рх.
+		   2. Можно было сгрупировать
+		   .featured_item .circ,
+		   .featured_item .img_wrap,
+		   .featured_item .info{
+		   	  height: 269px;
+				  width: 269px;
+		   	}*/
+	}
+	.navi {
+		display: none;
+		position: absolute;
+		top: 20px;
+		right: 0;
+		width: 290px;
+		text-align: right;
+	}
+	.navi ul {
+		background-color: #eee;
+		margin: 0;
+		padding: 0;
+	}
+	.navi ul li {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	.navi ul li a{
+		line-height: 40px;
+		padding: 5px 10px 0 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		transition: all .3s ease;
+		font-size: 22px;
+	}
+	.navi ul li a:hover {
+		background-color: #ccc;
+	}
+	.logo_wrap img {
+		max-width: 170px;
+	}
+	.servic_item img {
+		max-width: 170px;
+		margin-right: 15px;
+	}
+	.servic_item .text_wrap {
+		padding-left: 0;
+	}
+	.contact_form .control-group input  {
+		width: 100%;
+	}
+	.map iframe {
+		width: 730px;
+		/* Лучше использовать max-width: 700px; тогда не придется прописывать ниже
+			 width: 100%; */
+	}
+
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+	.featured_item .circ {
+		margin: 0 auto;
+	}
+	.soc_icons ul {
+		text-align: left;
+	}
+	.soc_icons {
+		margin-top: 30px;
+	}
+	.servic_item .text_wrap {
+		padding-left: 185px;
+	}
+	.item_management img {
+		max-width: 170px;
+	}
+	.item_management .text_management{
+		padding-left: 180px;
+	}
+	.item_blog img {
+		max-width: 190px;
+	}
+	.item_blog .text_blog {
+		padding-left: 200px;
+	}
+	.map iframe {
+		width: 100%;
+	}
+
+
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+	.news_wrap .item_news img {
+		float: none;
+		margin-bottom: 20px;
+	}
+	.news_wrap .item_news {
+		text-align: center;
+	}
+	.text_news {
+		padding-left: 0;
+	}
+	.servic_item img {
+		width: 100%;
+		float: none;
+		margin-right: 0;
+		display: block;
+		margin: 0 auto 15px;
+	}
+	.servic_item .text_wrap {
+		padding-left: 0;
+	}
+	.item_management img {
+		max-width: auto;
+		float: none;
+		display: block;
+		margin: 0 auto 15px;
+	}
+	.item_management .text_management{
+		padding-left: 0;
+	}
+	.item_management {
+		text-align: center;
+	}
+	.item_management p, .item_management .basic_h_a {
+		text-align: left;
+	}
+	.item_blog img {
+		max-width: auto;
+		float: none;
+		margin-bottom: 20px;
+	}
+	.item_blog .text_blog {
+		padding-left: 0;
+	}
+
+
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (max-width : 320px) {
+
+}
+
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+	.navi {
+		display: block !important;
+	}
+}
+
+ /* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+/* Пустые media вообще не понятно нахуя */
